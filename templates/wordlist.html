@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    {% for word in wordlist: %}
+        <div class="wordbox">{{ word }}</div>
+    {% endfor %}
+</main>
+{% endblock %}
