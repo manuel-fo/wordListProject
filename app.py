@@ -102,7 +102,7 @@ def proxy():
     resp.headers['Content-Type'] = 'application/json'
     return resp
 
-@app.route('/definition/<word>')
+@app.route('/definition/<word>', methods=['GET', 'POST'])
 def getDefinition(word):
     KEY = "bb174e73-8c43-435d-b626-8698c6bf8fc2"
     link = "https://www.dictionaryapi.com/api/v3/references/collegiate/json/" + word +"?key=" + KEY
@@ -111,8 +111,7 @@ def getDefinition(word):
         print("The request for the word was a success: " + word)
     else:
         print("the request for the word was a failure: " + word)
-    return render_template('wordlist.html',
-        wordlist=sorted(sorted(wordset),key=len))
+    return response.json()[0]['shortdef'][0]
 
 
 if __name__ == '__main__':

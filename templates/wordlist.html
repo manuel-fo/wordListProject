@@ -3,14 +3,20 @@
 {% block content %}
 <main>
     {% for word in wordlist: %}
-        <div class="wordbox" onclick="openPopup()">{{word}}
-            <span class="popup" id="definition">Popup text...</span>
+        <div class="wordbox" onclick="openPopup(this.id)" id={{word}}>{{word}}
+            <span class="popup" id={{word}}{{word}}>{{word}}</span>
         </div>
     {% endfor %}
 </main>
 <script>
-        function openPopup() {
-            var popup = document.getElementById("definition");
+        async function openPopup(word) {
+            var popup = document.getElementById(word+word);
+            response = await fetch('/definition/'+word)
+                .then(function(response) {
+                    return response.text();
+                }).then(function(data) {
+                    popup.innerHTML = data;
+                });
             popup.classList.toggle("show");
         }
     </script>
