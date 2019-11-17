@@ -4,7 +4,17 @@
     <h1>Word Finder</h1>
     <form action="/words" method="post">
         {{ form.hidden_tag() }}
-        {{ render_field(form.avail_letters) }}
+        {{ form.avail_letters.label }}
+        {{ form.avail_letters }}
+        {{ form.word_length.label }}
+        {{ form.word_length }}
+        {{ form.word_pattern.label }}
+        {{ form.word_pattern }}
+        <ul>
+            {% for error in form.word_pattern.errors %}
+                <li style="color:red;">{{error}}</li>
+            {% endfor %}
+        </ul>
         <br />
         {{form.submit()}}
     </form>

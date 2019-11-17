@@ -3,7 +3,17 @@
 {% block content %}
 <main>
     {% for word in wordlist: %}
-        <div class="wordbox">{{ word }}</div>
+        <div class="wordbox" onclick="openPopup()">{{word}}
+            <span class="popup" id="definition">Popup text...</span>
+        </div>
     {% endfor %}
 </main>
+<script>
+        function openPopup() {
+            var popup = document.getElementById("definition");
+            popup.classList.toggle("show");
+        }
+    </script>
 {% endblock %}
+
+
